@@ -1,47 +1,23 @@
-# MOS Manifest
+# MOS Hub Template Builder
 
-Manifest ist ein **MOS-Plugin**, das ein Formular für `template.json`-Einträge
-aus [docker_json_templates](https://github.com/s3ppo/docker_json_templates)
-direkt in die MOS-Oberfläche bringt — für `compose`, `docker` und `plugin`.
+A web-based form builder for creating manifest files (`template.json`) for the MOS Hub ecosystem. This tool provides an intuitive interface for generating configuration manifests for three types of deployments:
+
+- **Compose**: Docker Compose configurations with metadata (name, categories, description, URLs)
+- **Docker**: Full Docker container specifications including environment variables, ports, volumes, devices, labels, and advanced options
+- **Plugin**: Plugin metadata and configuration details
+
+The application generates properly formatted JSON output that can be directly used in MOS Hub repositories. It also supports creating separate `compose.yaml` files for Compose configurations.
+
+### Features
+
+- Multi-form interface for different manifest types
+- Real-time JSON preview and validation
+- Copy and download functionality
+- Support for complex configurations (paths, ports, variables, devices, labels)
+- Advanced options for GPU and CPU settings
 
 ---
 
-## Unterschied zu anderen MOS-Plugins
+## License
 
-Dieses Plugin hat **keinen Treiber** und keinen Backend-Prozess. Es installiert
-nichts auf dem System, ruft keine Query-Skripte auf und braucht daher weder
-`functions`, `install.sh` noch einen Eintrag unter `/usr/bin/plugins/`.
-Es liefert ausschließlich das statische Vue-Frontend — die gesamte Logik läuft
-im Browser.
-
-`driver` im MOS-Hub-Katalogeintrag (`plugins/*.json` im `docker_json_templates`-Repo)
-ist entsprechend `false`.
-
-## Aufbau
-
-- `page/` — Vue-3-App (Vite + Module Federation), analog zu `mos-htop`/`mos-nethogs`.
-  `Plugin.vue` wird von MOS als Remote-Komponente geladen und läuft im
-  Vue-Kontext des Hosts — **Vuetify wird deshalb nicht als eigene Dependency
-  geführt**, sondern vom MOS-Host bereitgestellt (gleiches Muster wie bei den
-  bestehenden Plugins).
-- `.github/workflows/build-plugin.yml` — baut das Frontend und packt es als
-  `.deb` (ohne Backend-Anteil).
-
-## Offene Punkte vor dem ersten Release
-
-- **Icon** fehlt noch (`page/plugin.config.js` → `icon: ''`). Am besten unter
-  `page/assets/` ablegen und die rohe GitHub-URL eintragen, wie bei den
-  anderen Plugins.
-- **Lokale Vorschau** (`npm run dev`) zeigt die Vuetify-Komponenten (`v-*`)
-  nicht korrekt an, da Vuetify lokal nicht installiert ist — das ist bei
-  `mos-htop`/`mos-nethogs` genauso. Ein echter Test ist erst innerhalb von
-  MOS selbst möglich, bzw. für die lokale Vorschau müsste man Vuetify
-  vorübergehend als Dev-Dependency ergänzen.
-- **Hub-Katalogeintrag**: Damit das Plugin im MosHub erscheint, braucht es
-  zusätzlich einen Eintrag unter `plugins/` im `docker_json_templates`-Repo
-  (Kategorie, Architektur, Repository-URL, `driver: false` usw.) — diesen
-  Eintrag kann man mit dem Manifest-Generator selbst erzeugen (Reiter „Plugin").
-
-## Lizenz
-
-GPL-3.0, wie die übrigen MOS-Plugins in diesem Ökosystem.
+GPL-3.0, like the other MOS plugins in this ecosystem.

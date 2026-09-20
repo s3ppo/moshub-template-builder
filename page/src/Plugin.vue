@@ -1,9 +1,9 @@
 <template>
   <div class="pa-4">
     <div class="mb-4">
-      <h2 class="text-h5 font-weight-bold mb-1">Manifest</h2>
+      <h2 class="text-h5 font-weight-bold mb-1">MOS Hub Template Generator</h2>
       <div class="text-body-2 text-medium-emphasis">
-        Formular für template.json — compose, docker oder plugin.
+        Form to MOS Hub Templates (JSON) — compose, docker, or plugin.
       </div>
     </div>
 
@@ -22,16 +22,16 @@
           <v-window-item value="compose">
             <v-text-field v-model="compose.name" label="Name" variant="outlined" density="comfortable" class="mb-2" />
             <v-combobox v-model="compose.category" :items="CATEGORY_OPTIONS" multiple chips closable-chips
-                        label="Kategorien" variant="outlined" density="comfortable" class="mb-2" />
-            <v-textarea v-model="compose.description" label="Beschreibung" variant="outlined" rows="3" class="mb-2" />
+                        label="Categories" variant="outlined" density="comfortable" class="mb-2" />
+            <v-textarea v-model="compose.description" label="Description" variant="outlined" rows="3" class="mb-2" />
             <v-row dense>
               <v-col cols="12" sm="6"><v-text-field v-model="compose.website" label="Website" variant="outlined" density="comfortable" /></v-col>
-              <v-col cols="12" sm="6"><v-text-field v-model="compose.icon" label="Icon-URL" variant="outlined" density="comfortable" /></v-col>
+              <v-col cols="12" sm="6"><v-text-field v-model="compose.icon" label="Icon URL" variant="outlined" density="comfortable" /></v-col>
             </v-row>
             <v-row dense>
-              <v-col cols="12" sm="6"><v-text-field v-model="compose.support" label="Support-URL" variant="outlined" density="comfortable" /></v-col>
+              <v-col cols="12" sm="6"><v-text-field v-model="compose.support" label="Support URL" variant="outlined" density="comfortable" /></v-col>
               <v-col cols="12" sm="6">
-                <v-text-field v-model="compose.webui" label="Web-UI-URL (optional)" placeholder="http://[ADDRESS]:[PORT:8080]/"
+                <v-text-field v-model="compose.webui" label="Web-UI URL (optional)" placeholder="http://[ADDRESS]:[PORT:8080]/"
                               variant="outlined" density="comfortable" />
               </v-col>
             </v-row>
@@ -39,7 +39,7 @@
             <v-divider class="my-4" />
             <div class="text-subtitle-2 mb-1">compose.yaml</div>
             <div class="text-caption text-medium-emphasis mb-2">
-              Wird nicht ins JSON übernommen, sondern separat als eigene Datei im Ordner benötigt — hier nur zum bequemen Kopieren.
+              Not imported into JSON, but needed as a separate file in the folder — here just for convenient copying.
             </div>
             <v-textarea v-model="compose.yaml" variant="outlined" rows="8"
                         placeholder="services:&#10;  app:&#10;    image: …"
@@ -55,15 +55,15 @@
             <v-row dense>
               <v-col cols="12" sm="6">
                 <v-combobox v-model="docker.category" :items="CATEGORY_OPTIONS" multiple chips closable-chips
-                            label="Kategorien" variant="outlined" density="comfortable" />
+                            label="Categories" variant="outlined" density="comfortable" />
               </v-col>
-              <v-col cols="12" sm="6"><v-text-field v-model="docker.registry" label="Registry-URL" variant="outlined" density="comfortable" /></v-col>
+              <v-col cols="12" sm="6"><v-text-field v-model="docker.registry" label="Registry URL" variant="outlined" density="comfortable" /></v-col>
             </v-row>
             <v-row dense>
               <v-col cols="12" sm="4">
-                <v-combobox v-model="docker.network" :items="NETWORK_OPTIONS" label="Netzwerk" variant="outlined" density="comfortable" />
+                <v-combobox v-model="docker.network" :items="NETWORK_OPTIONS" label="Network" variant="outlined" density="comfortable" />
               </v-col>
-              <v-col cols="12" sm="4"><v-text-field v-model="docker.customIp" label="Custom IP" placeholder="leer = null" variant="outlined" density="comfortable" /></v-col>
+              <v-col cols="12" sm="4"><v-text-field v-model="docker.customIp" label="Custom IP" placeholder="empty = null" variant="outlined" density="comfortable" /></v-col>
               <v-col cols="12" sm="4">
                 <v-combobox v-model="docker.shell" :items="SHELL_OPTIONS" label="Default Shell" variant="outlined" density="comfortable" />
               </v-col>
@@ -73,156 +73,156 @@
               <v-col cols="12" sm="6"><v-text-field v-model="docker.extra" label="Extra Parameters" placeholder="--memory=1G" variant="outlined" density="comfortable" /></v-col>
               <v-col cols="12" sm="6"><v-text-field v-model="docker.post" label="Post Parameters" variant="outlined" density="comfortable" /></v-col>
             </v-row>
-            <v-text-field v-model="docker.webui" label="Web-UI-URL" placeholder="http://[IP]:[PORT:8080]/" variant="outlined" density="comfortable" />
+            <v-text-field v-model="docker.webui" label="Web-UI URL" placeholder="http://[IP]:[PORT:8080]/" variant="outlined" density="comfortable" />
             <v-row dense>
               <v-col cols="12" sm="6"><v-text-field v-model="docker.icon" label="Icon-URL" variant="outlined" density="comfortable" /></v-col>
-              <v-col cols="12" sm="6"><v-text-field v-model="docker.project" label="Project-URL" variant="outlined" density="comfortable" /></v-col>
+              <v-col cols="12" sm="6"><v-text-field v-model="docker.project" label="Project URL" variant="outlined" density="comfortable" /></v-col>
             </v-row>
-            <v-text-field v-model="docker.support" label="Support-URL" variant="outlined" density="comfortable" />
-            <v-textarea v-model="docker.description" label="Beschreibung" variant="outlined" rows="4" />
+            <v-text-field v-model="docker.support" label="Support URL" variant="outlined" density="comfortable" />
+            <v-textarea v-model="docker.description" label="Description" variant="outlined" rows="4" />
 
             <v-expansion-panels class="my-4" variant="accordion">
-              <v-expansion-panel title="Erweitert: cpu_set, gpus, no_autoupdate">
+              <v-expansion-panel title="Advanced: cpu_set, gpus, no_autoupdate">
                 <v-expansion-panel-text>
                   <v-alert type="info" variant="tonal" density="compact" class="mb-3">
-                    Diese drei Felder tauchen im Repo nur vereinzelt auf und werden nur ins JSON geschrieben, wenn hier aktiviert.
+                    These three fields appear only sporadically in the repo and are only written to JSON if enabled here.
                   </v-alert>
-                  <v-text-field v-model="docker.cpuSet" label="CPU-Set" placeholder="z. B. 0-3" variant="outlined" density="comfortable" class="mb-3" />
-                  <v-checkbox v-model="docker.includeGpus" label="gpus-Feld einschließen" density="compact" hide-details />
+                  <v-text-field v-model="docker.cpuSet" label="CPU-Set" placeholder="e.g. 0-3" variant="outlined" density="comfortable" class="mb-3" />
+                  <v-checkbox v-model="docker.includeGpus" label="Include gpus field" density="compact" hide-details />
                   <v-combobox v-model="docker.gpus" :items="[]" multiple chips closable-chips label="GPUs" placeholder="all"
                               variant="outlined" density="comfortable" class="mb-3" :disabled="!docker.includeGpus" />
-                  <v-checkbox v-model="docker.includeNoAuto" label="no_autoupdate-Feld einschließen" density="compact" hide-details />
+                  <v-checkbox v-model="docker.includeNoAuto" label="Include no_autoupdate field" density="compact" hide-details />
                   <v-checkbox v-model="docker.noAuto" label="no_autoupdate = true" density="compact" hide-details :disabled="!docker.includeNoAuto" />
                 </v-expansion-panel-text>
               </v-expansion-panel>
             </v-expansion-panels>
 
-            <!-- Pfade -->
+            <!-- Paths -->
             <v-divider class="my-4" />
-            <div class="text-subtitle-2 mb-1">Pfade (paths)</div>
-            <div class="text-caption text-medium-emphasis mb-2">Volumes — Host- zu Container-Pfad-Zuordnungen.</div>
+            <div class="text-subtitle-2 mb-1">Paths (paths)</div>
+            <div class="text-caption text-medium-emphasis mb-2">Volumes — Host-to-Container path mappings.</div>
             <v-sheet v-for="(row, i) in paths" :key="'p'+i" variant="outlined" class="pa-3 mb-2" rounded>
               <v-row dense align="center">
                 <v-col cols="12" sm="3"><v-text-field v-model="row.name" label="Name" density="compact" variant="outlined" hide-details /></v-col>
-                <v-col cols="12" sm="3"><v-text-field v-model="row.host" label="Host-Pfad" density="compact" variant="outlined" hide-details /></v-col>
-                <v-col cols="12" sm="3"><v-text-field v-model="row.container" label="Container-Pfad" density="compact" variant="outlined" hide-details /></v-col>
-                <v-col cols="6" sm="2"><v-select v-model="row.mode" :items="['rw','ro']" label="Modus" density="compact" variant="outlined" hide-details /></v-col>
+                <v-col cols="12" sm="3"><v-text-field v-model="row.host" label="Host Path" density="compact" variant="outlined" hide-details /></v-col>
+                <v-col cols="12" sm="3"><v-text-field v-model="row.container" label="Container Path" density="compact" variant="outlined" hide-details /></v-col>
+                <v-col cols="6" sm="2"><v-select v-model="row.mode" :items="['rw','ro']" label="Mode" density="compact" variant="outlined" hide-details /></v-col>
                 <v-col cols="6" sm="1" class="text-right"><v-btn icon="mdi-close" size="small" variant="text" @click="paths.splice(i,1)" /></v-col>
               </v-row>
               <v-row dense>
-                <v-col cols="9"><v-text-field v-model="row.description" label="Beschreibung" density="compact" variant="outlined" hide-details /></v-col>
-                <v-col cols="3" class="d-flex align-center"><v-checkbox v-model="row.required" label="Pflicht" density="compact" hide-details /></v-col>
+                <v-col cols="9"><v-text-field v-model="row.description" label="Description" density="compact" variant="outlined" hide-details /></v-col>
+                <v-col cols="3" class="d-flex align-center"><v-checkbox v-model="row.required" label="Required" density="compact" hide-details /></v-col>
               </v-row>
             </v-sheet>
-            <v-btn variant="text" size="small" prepend-icon="mdi-plus" @click="paths.push(newPathRow())">Zeile hinzufügen</v-btn>
+            <v-btn variant="text" size="small" prepend-icon="mdi-plus" @click="paths.push(newPathRow())">Add Row</v-btn>
 
             <!-- Ports -->
             <v-divider class="my-4" />
             <div class="text-subtitle-2 mb-1">Ports</div>
-            <div class="text-caption text-medium-emphasis mb-2">Host- zu Container-Port-Zuordnungen.</div>
+            <div class="text-caption text-medium-emphasis mb-2">Host-to-Container port mappings.</div>
             <v-sheet v-for="(row, i) in ports" :key="'port'+i" variant="outlined" class="pa-3 mb-2" rounded>
               <v-row dense align="center">
                 <v-col cols="12" sm="3"><v-text-field v-model="row.name" label="Name" density="compact" variant="outlined" hide-details /></v-col>
-                <v-col cols="6" sm="2"><v-text-field v-model="row.host" label="Host-Port" density="compact" variant="outlined" hide-details /></v-col>
-                <v-col cols="6" sm="2"><v-text-field v-model="row.container" label="Container-Port" density="compact" variant="outlined" hide-details /></v-col>
-                <v-col cols="6" sm="2"><v-select v-model="row.protocol" :items="['tcp','udp']" label="Protokoll" density="compact" variant="outlined" hide-details /></v-col>
+                <v-col cols="6" sm="2"><v-text-field v-model="row.host" label="Host Port" density="compact" variant="outlined" hide-details /></v-col>
+                <v-col cols="6" sm="2"><v-text-field v-model="row.container" label="Container Port" density="compact" variant="outlined" hide-details /></v-col>
+                <v-col cols="6" sm="2"><v-select v-model="row.protocol" :items="['tcp','udp']" label="Protocol" density="compact" variant="outlined" hide-details /></v-col>
                 <v-col cols="6" sm="1" class="text-right"><v-btn icon="mdi-close" size="small" variant="text" @click="ports.splice(i,1)" /></v-col>
               </v-row>
               <v-row dense>
-                <v-col cols="7"><v-text-field v-model="row.description" label="Beschreibung" density="compact" variant="outlined" hide-details /></v-col>
-                <v-col cols="3" class="d-flex align-center"><v-checkbox v-model="row.required" label="Pflicht" density="compact" hide-details /></v-col>
-                <v-col cols="2" class="d-flex align-center"><v-checkbox v-model="row.mask" label="Mask." density="compact" hide-details /></v-col>
+                <v-col cols="7"><v-text-field v-model="row.description" label="Description" density="compact" variant="outlined" hide-details /></v-col>
+                <v-col cols="3" class="d-flex align-center"><v-checkbox v-model="row.required" label="Required" density="compact" hide-details /></v-col>
+                <v-col cols="2" class="d-flex align-center"><v-checkbox v-model="row.mask" label="Mask" density="compact" hide-details /></v-col>
               </v-row>
             </v-sheet>
-            <v-btn variant="text" size="small" prepend-icon="mdi-plus" @click="ports.push(newPortRow())">Zeile hinzufügen</v-btn>
+            <v-btn variant="text" size="small" prepend-icon="mdi-plus" @click="ports.push(newPortRow())">Add Row</v-btn>
 
-            <!-- Variablen -->
+            <!-- Variables -->
             <v-divider class="my-4" />
-            <div class="text-subtitle-2 mb-1">Umgebungsvariablen (variables)</div>
-            <div class="text-caption text-medium-emphasis mb-2">Environment-Variablen des Containers.</div>
+            <div class="text-subtitle-2 mb-1">Environment Variables (variables)</div>
+            <div class="text-caption text-medium-emphasis mb-2">Container environment variables.</div>
             <v-sheet v-for="(row, i) in variables" :key="'v'+i" variant="outlined" class="pa-3 mb-2" rounded>
               <v-row dense align="center">
-                <v-col cols="12" sm="3"><v-text-field v-model="row.name" label="Anzeigename" density="compact" variant="outlined" hide-details /></v-col>
+                <v-col cols="12" sm="3"><v-text-field v-model="row.name" label="Display Name" density="compact" variant="outlined" hide-details /></v-col>
                 <v-col cols="12" sm="3"><v-text-field v-model="row.key" label="Key" density="compact" variant="outlined" hide-details /></v-col>
-                <v-col cols="12" sm="4"><v-text-field v-model="row.value" label="Wert" density="compact" variant="outlined" hide-details /></v-col>
+                <v-col cols="12" sm="4"><v-text-field v-model="row.value" label="Value" density="compact" variant="outlined" hide-details /></v-col>
                 <v-col cols="12" sm="1" class="text-right"><v-btn icon="mdi-close" size="small" variant="text" @click="variables.splice(i,1)" /></v-col>
               </v-row>
               <v-row dense>
-                <v-col cols="7"><v-text-field v-model="row.description" label="Beschreibung" density="compact" variant="outlined" hide-details /></v-col>
-                <v-col cols="3" class="d-flex align-center"><v-checkbox v-model="row.required" label="Pflicht" density="compact" hide-details /></v-col>
-                <v-col cols="2" class="d-flex align-center"><v-checkbox v-model="row.mask" label="Mask." density="compact" hide-details /></v-col>
+                <v-col cols="7"><v-text-field v-model="row.description" label="Description" density="compact" variant="outlined" hide-details /></v-col>
+                <v-col cols="3" class="d-flex align-center"><v-checkbox v-model="row.required" label="Required" density="compact" hide-details /></v-col>
+                <v-col cols="2" class="d-flex align-center"><v-checkbox v-model="row.mask" label="Mask" density="compact" hide-details /></v-col>
               </v-row>
             </v-sheet>
-            <v-btn variant="text" size="small" prepend-icon="mdi-plus" @click="variables.push(newVarRow())">Zeile hinzufügen</v-btn>
+            <v-btn variant="text" size="small" prepend-icon="mdi-plus" @click="variables.push(newVarRow())">Add Row</v-btn>
 
-            <!-- Geräte -->
+            <!-- Devices -->
             <v-divider class="my-4" />
-            <div class="text-subtitle-2 mb-1">Geräte (devices)</div>
+            <div class="text-subtitle-2 mb-1">Devices (devices)</div>
             <v-alert type="info" variant="tonal" density="compact" class="mb-2">
-              Struktur ist im Repo nicht mit Beispielen belegt — hier analog zu „Pfade" nachgebildet (Host-Gerät → Container-Gerät).
-              Bei Bedarf an das tatsächliche Schema anpassen.
+              Structure is not documented with examples in the repo — here modeled analogously to "Paths" (Host Device → Container Device).
+              Adjust to the actual schema as needed.
             </v-alert>
             <v-sheet v-for="(row, i) in devices" :key="'d'+i" variant="outlined" class="pa-3 mb-2" rounded>
               <v-row dense align="center">
                 <v-col cols="12" sm="3"><v-text-field v-model="row.name" label="Name" density="compact" variant="outlined" hide-details /></v-col>
-                <v-col cols="12" sm="4"><v-text-field v-model="row.host" label="Host-Gerät" density="compact" variant="outlined" hide-details /></v-col>
-                <v-col cols="12" sm="4"><v-text-field v-model="row.container" label="Container-Gerät" density="compact" variant="outlined" hide-details /></v-col>
+                <v-col cols="12" sm="4"><v-text-field v-model="row.host" label="Host Device" density="compact" variant="outlined" hide-details /></v-col>
+                <v-col cols="12" sm="4"><v-text-field v-model="row.container" label="Container Device" density="compact" variant="outlined" hide-details /></v-col>
                 <v-col cols="12" sm="1" class="text-right"><v-btn icon="mdi-close" size="small" variant="text" @click="devices.splice(i,1)" /></v-col>
               </v-row>
               <v-row dense>
-                <v-col cols="9"><v-text-field v-model="row.description" label="Beschreibung" density="compact" variant="outlined" hide-details /></v-col>
-                <v-col cols="3" class="d-flex align-center"><v-checkbox v-model="row.required" label="Pflicht" density="compact" hide-details /></v-col>
+                <v-col cols="9"><v-text-field v-model="row.description" label="Description" density="compact" variant="outlined" hide-details /></v-col>
+                <v-col cols="3" class="d-flex align-center"><v-checkbox v-model="row.required" label="Required" density="compact" hide-details /></v-col>
               </v-row>
             </v-sheet>
-            <v-btn variant="text" size="small" prepend-icon="mdi-plus" @click="devices.push(newDeviceRow())">Zeile hinzufügen</v-btn>
+            <v-btn variant="text" size="small" prepend-icon="mdi-plus" @click="devices.push(newDeviceRow())">Add Row</v-btn>
 
             <!-- Labels -->
             <v-divider class="my-4" />
             <div class="text-subtitle-2 mb-1">Labels</div>
-            <div class="text-caption text-medium-emphasis mb-2">Container-Labels, z. B. für Traefik-Routing.</div>
+            <div class="text-caption text-medium-emphasis mb-2">Container labels, e.g. for Traefik routing.</div>
             <v-sheet v-for="(row, i) in labels" :key="'l'+i" variant="outlined" class="pa-3 mb-2" rounded>
               <v-row dense align="center">
-                <v-col cols="12" sm="3"><v-text-field v-model="row.name" label="Anzeigename" density="compact" variant="outlined" hide-details /></v-col>
+                <v-col cols="12" sm="3"><v-text-field v-model="row.name" label="Display Name" density="compact" variant="outlined" hide-details /></v-col>
                 <v-col cols="12" sm="3"><v-text-field v-model="row.key" label="Key" density="compact" variant="outlined" hide-details /></v-col>
-                <v-col cols="12" sm="4"><v-text-field v-model="row.value" label="Wert" density="compact" variant="outlined" hide-details /></v-col>
+                <v-col cols="12" sm="4"><v-text-field v-model="row.value" label="Value" density="compact" variant="outlined" hide-details /></v-col>
                 <v-col cols="12" sm="1" class="text-right"><v-btn icon="mdi-close" size="small" variant="text" @click="labels.splice(i,1)" /></v-col>
               </v-row>
               <v-row dense>
-                <v-col cols="7"><v-text-field v-model="row.description" label="Beschreibung" density="compact" variant="outlined" hide-details /></v-col>
-                <v-col cols="3" class="d-flex align-center"><v-checkbox v-model="row.required" label="Pflicht" density="compact" hide-details /></v-col>
-                <v-col cols="2" class="d-flex align-center"><v-checkbox v-model="row.mask" label="Mask." density="compact" hide-details /></v-col>
+                <v-col cols="7"><v-text-field v-model="row.description" label="Description" density="compact" variant="outlined" hide-details /></v-col>
+                <v-col cols="3" class="d-flex align-center"><v-checkbox v-model="row.required" label="Required" density="compact" hide-details /></v-col>
+                <v-col cols="2" class="d-flex align-center"><v-checkbox v-model="row.mask" label="Mask" density="compact" hide-details /></v-col>
               </v-row>
             </v-sheet>
-            <v-btn variant="text" size="small" prepend-icon="mdi-plus" @click="labels.push(newLabelRow())">Zeile hinzufügen</v-btn>
+            <v-btn variant="text" size="small" prepend-icon="mdi-plus" @click="labels.push(newLabelRow())">Add Row</v-btn>
           </v-window-item>
 
           <!-- ===== Plugin ===== -->
           <v-window-item value="plugin">
             <v-row dense>
               <v-col cols="12" sm="6"><v-text-field v-model="plug.name" label="Name" placeholder="MOS htop" variant="outlined" density="comfortable" /></v-col>
-              <v-col cols="12" sm="6"><v-text-field v-model="plug.author" label="Autor" placeholder="s3ppo" variant="outlined" density="comfortable" /></v-col>
+              <v-col cols="12" sm="6"><v-text-field v-model="plug.author" label="Author" placeholder="s3ppo" variant="outlined" density="comfortable" /></v-col>
             </v-row>
-            <v-textarea v-model="plug.description" label="Beschreibung" variant="outlined" rows="3" />
+            <v-textarea v-model="plug.description" label="Description" variant="outlined" rows="3" />
             <v-row dense>
               <v-col cols="12" sm="6">
                 <v-combobox v-model="plug.category" :items="CATEGORY_OPTIONS" multiple chips closable-chips
-                            label="Kategorien" variant="outlined" density="comfortable" />
+                            label="Categories" variant="outlined" density="comfortable" />
               </v-col>
               <v-col cols="12" sm="6">
                 <v-combobox v-model="plug.arch" :items="['amd64','arm64']" multiple chips closable-chips
-                            label="Architektur" variant="outlined" density="comfortable" />
+                            label="Architecture" variant="outlined" density="comfortable" />
               </v-col>
             </v-row>
-            <v-checkbox v-model="plug.driver" label="Ist ein Treiber (driver)" density="compact" hide-details class="mb-2" />
+            <v-checkbox v-model="plug.driver" label="Is a driver (driver)" density="compact" hide-details class="mb-2" />
             <v-row dense>
-              <v-col cols="12" sm="6"><v-text-field v-model="plug.repo" label="Repository-URL" variant="outlined" density="comfortable" /></v-col>
-              <v-col cols="12" sm="6"><v-text-field v-model="plug.homepage" label="Homepage-URL" variant="outlined" density="comfortable" /></v-col>
+              <v-col cols="12" sm="6"><v-text-field v-model="plug.repo" label="Repository URL" variant="outlined" density="comfortable" /></v-col>
+              <v-col cols="12" sm="6"><v-text-field v-model="plug.homepage" label="Homepage URL" variant="outlined" density="comfortable" /></v-col>
             </v-row>
             <v-row dense>
-              <v-col cols="12" sm="6"><v-text-field v-model="plug.icon" label="Icon-URL" variant="outlined" density="comfortable" /></v-col>
-              <v-col cols="12" sm="6"><v-text-field v-model="plug.support" label="Support-URL" variant="outlined" density="comfortable" /></v-col>
+              <v-col cols="12" sm="6"><v-text-field v-model="plug.icon" label="Icon URL" variant="outlined" density="comfortable" /></v-col>
+              <v-col cols="12" sm="6"><v-text-field v-model="plug.support" label="Support URL" variant="outlined" density="comfortable" /></v-col>
             </v-row>
-            <v-text-field v-model="plug.donate" label="Donate (optional)" placeholder='leer = ""' variant="outlined" density="comfortable" />
+            <v-text-field v-model="plug.donate" label="Donate (optional)" placeholder='empty = ""' variant="outlined" density="comfortable" />
           </v-window-item>
 
         </v-window>
@@ -234,9 +234,9 @@
           <v-card-title class="d-flex align-center flex-wrap gap-2">
             <span class="text-body-2 text-medium-emphasis">template.json</span>
             <v-spacer />
-            <v-btn size="small" variant="text" prepend-icon="mdi-download" @click="downloadJson">Herunterladen</v-btn>
+            <v-btn size="small" variant="text" prepend-icon="mdi-download" @click="downloadJson">Download</v-btn>
             <v-btn size="small" :color="copied ? 'success' : 'primary'" @click="copyJson">
-              {{ copied ? 'Kopiert' : 'Kopieren' }}
+              {{ copied ? 'Copied' : 'Copy' }}
             </v-btn>
           </v-card-title>
           <v-divider />
@@ -247,10 +247,10 @@
           <template v-if="type === 'compose'">
             <v-divider />
             <v-card-title class="d-flex align-center">
-              <span class="text-body-2 text-medium-emphasis">compose.yaml — separate Datei, kein JSON</span>
+              <span class="text-body-2 text-medium-emphasis">compose.yaml — separate file, not JSON</span>
               <v-spacer />
               <v-btn size="small" :color="copiedYaml ? 'success' : undefined" variant="text" @click="copyYaml">
-                {{ copiedYaml ? 'Kopiert' : 'Kopieren' }}
+                {{ copiedYaml ? 'Copied' : 'Copy' }}
               </v-btn>
             </v-card-title>
             <v-divider />

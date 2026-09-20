@@ -61,7 +61,7 @@ jobs:
           Version: ${VERSION}-1+mos-plugin
           Architecture: amd64
           Maintainer: admin@minenet.at
-          Description: Manifest Template-Generator Plugin for MOS
+          Description: Moshub Template Builder Plugin for MOS
           EOF
 
       - name: Build .deb package
