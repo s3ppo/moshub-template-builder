@@ -158,10 +158,6 @@
             <!-- Devices -->
             <v-divider class="my-4" />
             <div class="text-subtitle-2 mb-1">Devices (devices)</div>
-            <v-alert type="info" variant="tonal" density="compact" class="mb-2">
-              Structure is not documented with examples in the repo — here modeled analogously to "Paths" (Host Device → Container Device).
-              Adjust to the actual schema as needed.
-            </v-alert>
             <v-sheet v-for="(row, i) in devices" :key="'d'+i" variant="outlined" class="pa-3 mb-2" rounded>
               <v-row dense align="center">
                 <v-col cols="12" sm="3"><v-text-field v-model="row.name" label="Name" density="compact" variant="outlined" hide-details /></v-col>
@@ -234,8 +230,8 @@
           <v-card-title class="d-flex align-center flex-wrap gap-2">
             <span class="text-body-2 text-medium-emphasis">template.json</span>
             <v-spacer />
-            <v-btn size="small" variant="text" prepend-icon="mdi-download" @click="downloadJson">Download</v-btn>
-            <v-btn size="small" :color="copied ? 'success' : 'primary'" @click="copyJson">
+            <v-btn size="x-small" variant="text" prepend-icon="mdi-download" @click="downloadJson">Download</v-btn>
+            <v-btn size="x-small" :color="copied ? 'success' : 'primary'" @click="copyJson">
               {{ copied ? 'Copied' : 'Copy' }}
             </v-btn>
           </v-card-title>
@@ -249,7 +245,7 @@
             <v-card-title class="d-flex align-center">
               <span class="text-body-2 text-medium-emphasis">compose.yaml — separate file, not JSON</span>
               <v-spacer />
-              <v-btn size="small" :color="copiedYaml ? 'success' : undefined" variant="text" @click="copyYaml">
+              <v-btn size="x-small" :color="copiedYaml ? 'success' : undefined" variant="text" @click="copyYaml">
                 {{ copiedYaml ? 'Copied' : 'Copy' }}
               </v-btn>
             </v-card-title>
