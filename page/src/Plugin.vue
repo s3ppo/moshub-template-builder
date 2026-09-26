@@ -84,9 +84,6 @@
             <v-expansion-panels class="my-4" variant="accordion">
               <v-expansion-panel title="Advanced: cpu_set, gpus, no_autoupdate">
                 <v-expansion-panel-text>
-                  <v-alert type="info" variant="tonal" density="compact" class="mb-3">
-                    These three fields appear only sporadically in the repo and are only written to JSON if enabled here.
-                  </v-alert>
                   <v-text-field v-model="docker.cpuSet" label="CPU-Set" placeholder="e.g. 0-3" variant="outlined" density="comfortable" class="mb-3" />
                   <v-checkbox v-model="docker.includeGpus" label="Include gpus field" density="compact" hide-details />
                   <v-combobox v-model="docker.gpus" :items="[]" multiple chips closable-chips label="GPUs" placeholder="all"
@@ -107,14 +104,14 @@
                 <v-col cols="12" sm="3"><v-text-field v-model="row.host" label="Host Path" density="compact" variant="outlined" hide-details /></v-col>
                 <v-col cols="12" sm="3"><v-text-field v-model="row.container" label="Container Path" density="compact" variant="outlined" hide-details /></v-col>
                 <v-col cols="6" sm="2"><v-select v-model="row.mode" :items="['rw','ro']" label="Mode" density="compact" variant="outlined" hide-details /></v-col>
-                <v-col cols="6" sm="1" class="text-right"><v-btn icon="mdi-close" size="small" variant="text" @click="paths.splice(i,1)" /></v-col>
+                <v-col cols="6" sm="1" class="text-right"><v-btn icon="mdi-close" size="small" variant="text" @click="paths.splice(i,1)" style="font-size: 0.7rem;" /></v-col>
               </v-row>
               <v-row dense>
                 <v-col cols="9"><v-text-field v-model="row.description" label="Description" density="compact" variant="outlined" hide-details /></v-col>
                 <v-col cols="3" class="d-flex align-center"><v-checkbox v-model="row.required" label="Required" density="compact" hide-details /></v-col>
               </v-row>
             </v-sheet>
-            <v-btn variant="text" size="small" prepend-icon="mdi-plus" @click="paths.push(newPathRow())">Add Row</v-btn>
+            <v-btn variant="text" size="small" prepend-icon="mdi-plus" @click="paths.push(newPathRow())" style="font-size: 0.7rem;">Add Row</v-btn>
 
             <!-- Ports -->
             <v-divider class="my-4" />
@@ -126,7 +123,7 @@
                 <v-col cols="6" sm="2"><v-text-field v-model="row.host" label="Host Port" density="compact" variant="outlined" hide-details /></v-col>
                 <v-col cols="6" sm="2"><v-text-field v-model="row.container" label="Container Port" density="compact" variant="outlined" hide-details /></v-col>
                 <v-col cols="6" sm="2"><v-select v-model="row.protocol" :items="['tcp','udp']" label="Protocol" density="compact" variant="outlined" hide-details /></v-col>
-                <v-col cols="6" sm="1" class="text-right"><v-btn icon="mdi-close" size="small" variant="text" @click="ports.splice(i,1)" /></v-col>
+                <v-col cols="6" sm="1" class="text-right"><v-btn icon="mdi-close" size="small" variant="text" @click="ports.splice(i,1)" style="font-size: 0.7rem;" /></v-col>
               </v-row>
               <v-row dense>
                 <v-col cols="7"><v-text-field v-model="row.description" label="Description" density="compact" variant="outlined" hide-details /></v-col>
@@ -134,7 +131,7 @@
                 <v-col cols="2" class="d-flex align-center"><v-checkbox v-model="row.mask" label="Mask" density="compact" hide-details /></v-col>
               </v-row>
             </v-sheet>
-            <v-btn variant="text" size="small" prepend-icon="mdi-plus" @click="ports.push(newPortRow())">Add Row</v-btn>
+            <v-btn variant="text" size="small" prepend-icon="mdi-plus" @click="ports.push(newPortRow())" style="font-size: 0.7rem;">Add Row</v-btn>
 
             <!-- Variables -->
             <v-divider class="my-4" />
@@ -145,7 +142,7 @@
                 <v-col cols="12" sm="3"><v-text-field v-model="row.name" label="Display Name" density="compact" variant="outlined" hide-details /></v-col>
                 <v-col cols="12" sm="3"><v-text-field v-model="row.key" label="Key" density="compact" variant="outlined" hide-details /></v-col>
                 <v-col cols="12" sm="4"><v-text-field v-model="row.value" label="Value" density="compact" variant="outlined" hide-details /></v-col>
-                <v-col cols="12" sm="1" class="text-right"><v-btn icon="mdi-close" size="small" variant="text" @click="variables.splice(i,1)" /></v-col>
+                <v-col cols="12" sm="1" class="text-right"><v-btn icon="mdi-close" size="small" variant="text" @click="variables.splice(i,1)" style="font-size: 0.7rem;" /></v-col>
               </v-row>
               <v-row dense>
                 <v-col cols="7"><v-text-field v-model="row.description" label="Description" density="compact" variant="outlined" hide-details /></v-col>
@@ -153,7 +150,7 @@
                 <v-col cols="2" class="d-flex align-center"><v-checkbox v-model="row.mask" label="Mask" density="compact" hide-details /></v-col>
               </v-row>
             </v-sheet>
-            <v-btn variant="text" size="small" prepend-icon="mdi-plus" @click="variables.push(newVarRow())">Add Row</v-btn>
+            <v-btn variant="text" size="small" prepend-icon="mdi-plus" @click="variables.push(newVarRow())" style="font-size: 0.7rem;">Add Row</v-btn>
 
             <!-- Devices -->
             <v-divider class="my-4" />
@@ -163,14 +160,14 @@
                 <v-col cols="12" sm="3"><v-text-field v-model="row.name" label="Name" density="compact" variant="outlined" hide-details /></v-col>
                 <v-col cols="12" sm="4"><v-text-field v-model="row.host" label="Host Device" density="compact" variant="outlined" hide-details /></v-col>
                 <v-col cols="12" sm="4"><v-text-field v-model="row.container" label="Container Device" density="compact" variant="outlined" hide-details /></v-col>
-                <v-col cols="12" sm="1" class="text-right"><v-btn icon="mdi-close" size="small" variant="text" @click="devices.splice(i,1)" /></v-col>
+                <v-col cols="12" sm="1" class="text-right"><v-btn icon="mdi-close" size="small" variant="text" @click="devices.splice(i,1)" style="font-size: 0.7rem;" /></v-col>
               </v-row>
               <v-row dense>
                 <v-col cols="9"><v-text-field v-model="row.description" label="Description" density="compact" variant="outlined" hide-details /></v-col>
                 <v-col cols="3" class="d-flex align-center"><v-checkbox v-model="row.required" label="Required" density="compact" hide-details /></v-col>
               </v-row>
             </v-sheet>
-            <v-btn variant="text" size="small" prepend-icon="mdi-plus" @click="devices.push(newDeviceRow())">Add Row</v-btn>
+            <v-btn variant="text" size="small" prepend-icon="mdi-plus" @click="devices.push(newDeviceRow())" style="font-size: 0.7rem;">Add Row</v-btn>
 
             <!-- Labels -->
             <v-divider class="my-4" />
@@ -181,7 +178,7 @@
                 <v-col cols="12" sm="3"><v-text-field v-model="row.name" label="Display Name" density="compact" variant="outlined" hide-details /></v-col>
                 <v-col cols="12" sm="3"><v-text-field v-model="row.key" label="Key" density="compact" variant="outlined" hide-details /></v-col>
                 <v-col cols="12" sm="4"><v-text-field v-model="row.value" label="Value" density="compact" variant="outlined" hide-details /></v-col>
-                <v-col cols="12" sm="1" class="text-right"><v-btn icon="mdi-close" size="small" variant="text" @click="labels.splice(i,1)" /></v-col>
+                <v-col cols="12" sm="1" class="text-right"><v-btn icon="mdi-close" size="small" variant="text" @click="labels.splice(i,1)" style="font-size: 0.7rem;" /></v-col>
               </v-row>
               <v-row dense>
                 <v-col cols="7"><v-text-field v-model="row.description" label="Description" density="compact" variant="outlined" hide-details /></v-col>
@@ -189,7 +186,7 @@
                 <v-col cols="2" class="d-flex align-center"><v-checkbox v-model="row.mask" label="Mask" density="compact" hide-details /></v-col>
               </v-row>
             </v-sheet>
-            <v-btn variant="text" size="small" prepend-icon="mdi-plus" @click="labels.push(newLabelRow())">Add Row</v-btn>
+            <v-btn variant="text" size="small" prepend-icon="mdi-plus" @click="labels.push(newLabelRow())" style="font-size: 0.7rem;">Add Row</v-btn>
           </v-window-item>
 
           <!-- ===== Plugin ===== -->
@@ -230,8 +227,8 @@
           <v-card-title class="d-flex align-center flex-wrap gap-2">
             <span class="text-body-2 text-medium-emphasis">template.json</span>
             <v-spacer />
-            <v-btn size="x-small" variant="text" prepend-icon="mdi-download" @click="downloadJson">Download</v-btn>
-            <v-btn size="x-small" :color="copied ? 'success' : 'primary'" @click="copyJson">
+            <v-btn size="small" variant="text" prepend-icon="mdi-download" @click="downloadJson" style="font-size: 0.7rem;">Download</v-btn>
+            <v-btn size="small" :color="copied ? 'success' : 'primary'" @click="copyJson" style="font-size: 0.7rem;">
               {{ copied ? 'Copied' : 'Copy' }}
             </v-btn>
           </v-card-title>
@@ -245,7 +242,7 @@
             <v-card-title class="d-flex align-center">
               <span class="text-body-2 text-medium-emphasis">compose.yaml — separate file, not JSON</span>
               <v-spacer />
-              <v-btn size="x-small" :color="copiedYaml ? 'success' : undefined" variant="text" @click="copyYaml">
+              <v-btn size="small" :color="copiedYaml ? 'success' : undefined" variant="text" @click="copyYaml" style="font-size: 0.7rem;">
                 {{ copiedYaml ? 'Copied' : 'Copy' }}
               </v-btn>
             </v-card-title>
